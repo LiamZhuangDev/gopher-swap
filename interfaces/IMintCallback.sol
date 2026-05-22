@@ -2,7 +2,7 @@
 pragma solidity ^0.8.31;
 
 interface IMintCallback {
-    function minCallback(
+    function mintCallback(
         uint256 amount0Owed,
         uint256 amount1Owed,
         bytes calldata data

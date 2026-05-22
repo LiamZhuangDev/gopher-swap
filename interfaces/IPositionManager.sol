@@ -1,6 +1,9 @@
 // SPDX-License-Identifier: SEE LICENSE IN LICENSE
 pragma solidity ^0.8.31;
 
+import "@openzeppelin/contracts/interfaces/IERC721.sol";
+import "./IMintCallback.sol";
+
 interface IPositionManager is IERC721, IMintCallback {
     struct PositionInfo {
         uint256 id;

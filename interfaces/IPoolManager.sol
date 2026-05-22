@@ -1,7 +1,9 @@
 // SPDX-License-Identifier: SEE LICENSE IN LICENSE
 pragma solidity ^0.8.31;
 
-interface IPoolManager is IFactory {
+import "./IPoolFactory.sol";
+
+interface IPoolManager is IPoolFactory {
     
     struct CreatePoolParams {
         address token0;
