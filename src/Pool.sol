@@ -5,6 +5,10 @@ import "../interfaces/IPool.sol";
 
 contract Pool is IPool {
     /// @inheritdoc IPool
+    address public immutable override token0;
+    /// @inheritdoc IPool
+    address public immutable override token1;
+    /// @inheritdoc IPool
     uint24 public immutable override fee;
     /// @inheritdoc IPool
     int24 public immutable override tickLower;
@@ -12,6 +16,8 @@ contract Pool is IPool {
     int24 public immutable override tickUpper;
     /// @inheritdoc IPool
     uint160 public override sqrtPriceX96;
+    /// @inheritdoc IPool
+    uint128 public override liquidity;
 
     struct Position {
         uint128 liquidity;
@@ -23,11 +29,13 @@ contract Pool is IPool {
 
     mapping(address => Position) public positions;
 
+    function initialize(uint160 _sqrtPriceX96) external override {}
+
     function getPosition(address owner)
         external
         view
         returns (
-            uint128 liquidity,
+            uint128 positionLiquidity,
             uint256 feeGrowthInside0LastX128,
             uint256 feeGrowthInside1LastX128,
             uint128 tokensOwed0,

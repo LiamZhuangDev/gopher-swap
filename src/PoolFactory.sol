@@ -9,7 +9,7 @@ contract PoolFactory is IPoolFactory {
     mapping(address => mapping(address => address[])) public pools; // token0Addr => token1Addr => pools
 
     function createPool(address tokenA, address tokenB, int24 tickLower, int24 tickUpper, uint24 fee)
-        external
+        public
         override
         returns (address pool)
     {

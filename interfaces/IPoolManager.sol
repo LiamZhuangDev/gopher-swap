@@ -4,7 +4,13 @@ pragma solidity ^0.8.31;
 import "./IPoolFactory.sol";
 
 interface IPoolManager is IPoolFactory {
-    
+    struct Pair {
+        address token0;
+        address token1;
+    }
+
+    function getPairs() external view returns (Pair[] memory);
+
     struct CreatePoolParams {
         address token0;
         address token1;
@@ -30,11 +36,4 @@ interface IPoolManager is IPoolFactory {
     }
 
     function getPools() external view returns (PoolInfo[] memory pools);
-
-    struct Pair {
-        address token0;
-        address token1;
-    }
-
-    function getPairs() external view returns (Pair[] memory);
 }
