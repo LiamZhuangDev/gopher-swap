@@ -2,8 +2,11 @@
 pragma solidity ^0.8.31;
 
 import "../interfaces/IPool.sol";
+import "../interfaces/IPoolFactory.sol";
 
 contract Pool is IPool {
+    /// @inheritdoc IPool
+    address public immutable override factory;
     /// @inheritdoc IPool
     address public immutable override token0;
     /// @inheritdoc IPool
@@ -35,7 +38,7 @@ contract Pool is IPool {
         external
         view
         returns (
-            uint128 positionLiquidity,
+            uint128 liquidity,
             uint256 feeGrowthInside0LastX128,
             uint256 feeGrowthInside1LastX128,
             uint128 tokensOwed0,
@@ -50,6 +53,12 @@ contract Pool is IPool {
             position.tokensOwed0,
             position.tokensOwed1
         );
+    }
+
+    constructor() {
+        // IPoolFactory(msg.sender) is a type cast to the factory contract,
+        // which creates this pool and initializes the pool parameters.
+        (factory, token0, token1, tickLower, tickUpper, fee) = IPoolFactory(msg.sender).parameters();
     }
 
     function mint(address recipient, uint128 amount, bytes calldata data)

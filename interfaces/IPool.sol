@@ -2,6 +2,7 @@
 pragma solidity ^0.8.31;
 
 interface IPool {
+    function factory() external view returns (address);
     function token0() external view returns (address);
     function token1() external view returns (address);
     function fee() external view returns (uint24);

@@ -8,6 +8,8 @@ import "./Pool.sol";
 contract PoolFactory is IPoolFactory {
     mapping(address => mapping(address => address[])) public pools; // token0Addr => token1Addr => pools
 
+    Parameters public override parameters;
+
     function createPool(address tokenA, address tokenB, int24 tickLower, int24 tickUpper, uint24 fee)
         public
         override
@@ -30,9 +32,17 @@ contract PoolFactory is IPoolFactory {
             }
         }
 
+        // save pool info in factory's storage for pool to read during initialization
+        parameters = Parameters({
+            factory: address(this), tokenA: token0, tokenB: token1, tickLower: tickLower, tickUpper: tickUpper, fee: fee
+        });
+
         bytes32 salt = keccak256(abi.encode(token0, token1, tickLower, tickUpper, fee));
         pool = address(new Pool{salt: salt}());
         pools[token0][token1].push(pool);
+
+        // delete pool info
+        delete parameters;
     }
 
     function getPool(address tokenA, address tokenB, uint32 index) external view override returns (address) {
