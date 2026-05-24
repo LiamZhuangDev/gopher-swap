@@ -9,8 +9,13 @@ interface IPool {
     function tickLower() external view returns (int24);
     function tickUpper() external view returns (int24);
     function sqrtPriceX96() external view returns (uint160);
+    function tick() external view returns (int24);
     function liquidity() external view returns (uint128);
+    function feeGrowthGlobal0X128() external view returns (uint256);
+    function feeGrowthGlobal1X128() external view returns (uint256);
+
     function initialize(uint160 sqrtPriceX96) external;
+    
     function getPosition(address owner) external view returns (uint128 liquidity, uint256 feeGrowthInside0LastX128, uint256 feeGrowthInside1LastX128, uint128 tokensOwed0, uint128 tokensOwed1);
 
     function mint(
