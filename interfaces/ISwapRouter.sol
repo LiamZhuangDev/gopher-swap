@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: SEE LICENSE IN LICENSE
-pragma solidity ^0.8.31
+pragma solidity ^0.8.31;
+
+import "./ISwapCallback.sol";
 
 interface ISwapRouter is ISwapCallback {
     struct ExactInputParams {
