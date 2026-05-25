@@ -34,10 +34,10 @@ contract GopherSwapTest is Test {
     address public lp = makeAddr("lp");
     address public trader = makeAddr("trader");
 
-    uint24 public constant FEE = 3_000;
+    uint24 public constant FEE = 3_000; // 0.3% (3_000 / 1_000_000)
     int24 public constant TICK_LOWER = -60;
     int24 public constant TICK_UPPER = 60;
-    uint160 public constant SQRT_PRICE_X96 = 79_228_162_514_264_337_593_543_950_336;
+    uint160 public constant SQRT_PRICE_X96 = 79_228_162_514_264_337_593_543_950_336; // sqrt(1) * 2^96, i.e. tick is 0 when initial price is 1:1
 
     function setUp() public {
         poolManager = new PoolManager();
